@@ -1,0 +1,8 @@
+9-08
+	A heap priority queue can only remove the minimum priority object. Thus, for a to do list, only the job with the highest priority would be removed. This is ineffective if a user completes a job without the highest priority.
+
+	Solution:
+	Save the name of the current job with the highest priority. Change the priority of the completed job to the highest priority and then removeMin. To set the jobs priority, the jobs will be stored in a linkedlist. Cycle through the jobs until the one with the same name is found. Edit the priority. Perform an upheap. Then removeMin. Reset the job with the original highest priority to the highest priority.
+
+	---
+	Priority queue places objects by their priority. The index of the objects is the same as their priority.Therefore, each object can be found by their previous index.

@@ -21,8 +21,9 @@ public class ToDoList
 
 	public void remove()
 	{
-		System.out.println("Please enter the job you'd like to remove.");
-
+		heap.removeMin();
+		System.out.println("The job has been removed.");
+		
 
 	public static void main(String[] args)
 	{
