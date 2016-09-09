@@ -12,3 +12,7 @@
 	
 	---
 	Test ArrayList. If arraylist removes empty spaces and shifts other entries then arraylist with selection/insertion sort will be used. If not, heap with selection/insertion sort will be used. This is to preserve space. If an entry is removed and the blank space is not removed/nothing is shifted to take up the space, the arraylist will use a lot of memory.
+
+9-09
+
+The arraylist class removes any empty spaces. Thus arraylist with selection/insertion sort will be used.
