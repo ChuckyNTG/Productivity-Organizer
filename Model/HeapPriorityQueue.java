@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class HeapPriorityQueue
 {
 	ArrayList<Job> heapArray = new ArrayList<Job>();
-	LinkedList<Job> list = new LinkedList<Job>();
 
 	public static int compareInt(int a, int b)
 	{
@@ -104,7 +103,6 @@ public class HeapPriorityQueue
 	{
 		Job newest = new Job(name,description,priority);
 		heapArray.add(newest);
-		list.add(newest);
 
 		upheap(heapArray.size()-1);
 	}
@@ -145,18 +143,19 @@ public class HeapPriorityQueue
 			
 	public Job findJob(String name)
 	{
-		Job temp = list.getFirst();
-		while(temp != null)
-		{	
+		Job temp = heapArray.get(0);
+		for(int i = 1; i<heapArray.size();i++)
+		{
 			if(temp.getName().equals(name))
 			{
 				break;
 			}
 			else
 			{
-				temp = temp.getNext();
+				temp = heapArray.get(i);
 			}
 		}
+
 		return temp;
 	}
 

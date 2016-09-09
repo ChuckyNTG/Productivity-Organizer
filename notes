@@ -6,3 +6,9 @@
 
 	---
 	Priority queue places objects by their priority. The index of the objects is the same as their priority.Therefore, each object can be found by their previous index.
+
+	---
+	Priority queue needs to be printed.They must be in an array and printed from their in order of their keys. A heap cannot garentee that the nodes in a heap will be in order from left to right. Instead of sorting left to right, easier just to put nodes in an array and do selection/insertion sort. Scrapping heap priority queue...
+	
+	---
+	Test ArrayList. If arraylist removes empty spaces and shifts other entries then arraylist with selection/insertion sort will be used. If not, heap with selection/insertion sort will be used. This is to preserve space. If an entry is removed and the blank space is not removed/nothing is shifted to take up the space, the arraylist will use a lot of memory.
