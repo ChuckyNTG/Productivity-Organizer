@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class ToDoList
 {
-	HeapPriorityQueue heap = new HeapPriorityQueue();
-	
+	ListSort list = new ListSort();
+		
 	Scanner kbd1 = new Scanner(System.in);
 
 	public void add()
@@ -15,21 +15,30 @@ public class ToDoList
 		System.out.print("Enter the priority of the job: ");
 		int priority = kbd1.nextInt();
 		
-		heap.insert(name,description,priority); 
+		Job newest = new Job(name,description,priority);
+		list.add(newest);
 		System.out.println("Job successfully added.");
 	}
 
 	public void remove()
 	{
-		heap.removeMin();
+		System.out.print("Enter the name of the job you want removed: ");
+		String jobName = kbd1.nextLine();
+		list.remove(jobName);
 		System.out.println("The job has been removed.");
 		
+	}
 
+	public void print()
+	{
+		list.printList();
+	}
 	public static void main(String[] args)
 	{
+		ToDoList toDoList = new ToDoList();
 		Scanner kbd2 = new Scanner(System.in);
 			
-		boolean running = 1;
+		boolean running = true;
 		while(running)
 		{
 			System.out.print("Please enter the operation you'd like to perform: ");
@@ -38,22 +47,25 @@ public class ToDoList
 			switch (choice)
 			{
 				case "add":
-					running = 1;
+					toDoList.add();
+					running = true;
 					break;
 				case "remove":
-					running=1;
+					toDoList.remove();
+					running=true;
 					break;
-				case "list":
-					running=1;
+				case "print":
+					toDoList.print();
+					running=true;
 					break;
 				case "quit":
-					running=1;
+					running=false;
 					break;
 				default:
 					System.out.println("Invalid operation.");
-					running=1;
+					running=true;
 					break;	
 			}
 		}
 	}	
-
+}

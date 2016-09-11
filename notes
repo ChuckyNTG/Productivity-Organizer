@@ -20,3 +20,6 @@ The arraylist class removes any empty spaces. Thus arraylist with selection/inse
 9-10
 
 ArrayList class being built. Needs add and remove methods. May want to change name of "insert" method. See if there's a built in function to remove jobs with a specific attribute for the arraylist class.
+
+9-11
+Remove function in ListSort. Have the user input the priority to remove. Easier to search because array is ordered by priority.

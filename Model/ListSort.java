@@ -1,4 +1,4 @@
-import java.util.Array;
+import java.util.ArrayList;
 
 public class ListSort
 {
@@ -14,20 +14,23 @@ public class ListSort
 		list.add(job);
 	}
 
-	public void remove(Job job)
+	public void remove(String jobName)
 	{
 		
+		int index=list.indexOf(job);	
+		list.remove(index);
+	}
 
 	public void sort()
 	{
 		for (int i=1; i<list.size()-1;i++)
-		insert(i,list.get(i));
+		inSort(i,list.get(i));
 	}
 	
-	public void insert(int position, int value)
+	public void inSort(int position, Job value)
 	{
-		i = pos -1;
-		while(i>=0 && list.get(i)>value)
+		int i = position -1;
+		while(i>=0 && list.get(i).getPriority()>value.getPriority())
 		{
 			list.set(i+1,list.get(i));
 			i=i-1;
@@ -37,7 +40,15 @@ public class ListSort
 
 	public void printList()
 	{
+		System.out.println("The details of the list:");
+	
 		for(Job job:list)
 		{
-				
-				
+			System.out.println("Priority: " + job.getPriority());
+			System.out.println("Name: " + job.getName());
+			System.out.println("Description: " + job.getDescription());
+			System.out.println(" ");
+						
+		}
+	}			
+}
