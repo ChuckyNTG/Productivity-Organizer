@@ -23,3 +23,6 @@ ArrayList class being built. Needs add and remove methods. May want to change na
 
 9-11
 Remove function in ListSort. Have the user input the priority to remove. Easier to search because array is ordered by priority.
+
+	---
+	ToDoList not being sorted. Need further debugging using jdb or check algorithm by duplication on a separate simpiler program.

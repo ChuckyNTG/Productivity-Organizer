@@ -8,12 +8,13 @@ public class ToDoList
 
 	public void add()
 	{
-		System.out.println("Enter the name of the job: ");
+		System.out.print("Enter the name of the job: ");
 		String name = kbd1.nextLine();
 		System.out.print("Enter the description of the job: ");
 		String description = kbd1.nextLine();
 		System.out.print("Enter the priority of the job: ");
 		int priority = kbd1.nextInt();
+		kbd1.nextLine();
 		
 		Job newest = new Job(name,description,priority);
 		list.add(newest);
@@ -22,9 +23,9 @@ public class ToDoList
 
 	public void remove()
 	{
-		System.out.print("Enter the name of the job you want removed: ");
-		String jobName = kbd1.nextLine();
-		list.remove(jobName);
+		System.out.print("Enter the priority of the job you want removed: ");
+		int priority = kbd1.nextInt();
+		list.remove(priority);
 		System.out.println("The job has been removed.");
 		
 	}

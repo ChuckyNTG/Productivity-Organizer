@@ -12,19 +12,21 @@ public class ListSort
 	public void add(Job job)
 	{
 		list.add(job);
+		this.sort();
 	}
 
-	public void remove(String jobName)
+	public void remove(int priority)
 	{
-		
-		int index=list.indexOf(job);	
-		list.remove(index);
+		list.remove(priority);
+		this.sort();
 	}
 
 	public void sort()
 	{
 		for (int i=1; i<list.size()-1;i++)
-		inSort(i,list.get(i));
+		{
+			inSort(i,list.get(i));
+		}
 	}
 	
 	public void inSort(int position, Job value)
