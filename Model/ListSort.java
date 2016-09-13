@@ -23,7 +23,7 @@ public class ListSort
 
 	public void sort()
 	{
-		for (int i=1; i<list.size()-1;i++)
+		for (int i=1; i<list.size();i++)
 		{
 			inSort(i,list.get(i));
 		}
@@ -31,13 +31,13 @@ public class ListSort
 	
 	public void inSort(int position, Job value)
 	{
-		int i = position -1;
-		while(i>=0 && list.get(i).getPriority()>value.getPriority())
+		int j = position -1;
+		while(j>=0 && list.get(j).getPriority()>value.getPriority())
 		{
-			list.set(i+1,list.get(i));
-			i=i-1;
+			list.set(j+1,list.get(j));
+			j=j-1;
 		}
-		list.set(i+1,value);
+		list.set(j+1,value);
 	}
 
 	public void printList()
