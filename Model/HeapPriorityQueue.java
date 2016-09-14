@@ -50,19 +50,19 @@ public class HeapPriorityQueue
 		return right(j)<heapArray.size();
 	}
 	
-	public void swap(int i, int j)
+	public void swap(int i, int j,ArrayList heaplist)
 	{
-		Job temp = heapArray.get(i);
-		heapArray.set(i, heapArray.get(j));
-		heapArray.set(j, temp);
+		Job temp = heaplist.get(i);
+		heaplist.set(i, heaplist.get(j));
+		heaplist.set(j, temp);
 	}
 	
-	public void upheap(int j)
+	public void upheap(int j, ArrayList heaplist)
 	{
 		while(j>0)
 		{
 			int p = parent(j);
-			if(compareInt(heapArray.get(j).getPriority(),heapArray.get(p).getPriority()) >=0)
+			if(compareInt(heaplist.get(j).getPriority(),heaplist.get(p).getPriority()) >=0)
 			{
 				break;
 			}
@@ -74,7 +74,7 @@ public class HeapPriorityQueue
 		}
 	}
 
-	public void downheap(int j)
+	public void downheap(int j, ArrayList heaplist)
 	{
 		while(hasLeft(j))
 		{
@@ -83,12 +83,12 @@ public class HeapPriorityQueue
 			if(hasRight(j))
 			{
 				int rightIndex = right(j);
-				if(compareInt(heapArray.get(leftIndex).getPriority(),heapArray.get(rightIndex).getPriority()) > 0)
+				if(compareInt(heaplist.get(leftIndex).getPriority(),heaplist.get(rightIndex).getPriority()) > 0)
 				{
 					childIndex = rightIndex;
 				}
 			}
-			if(compareInt(heapArray.get(childIndex).getPriority(), heapArray.get(j).getPriority()) >=0)
+			if(compareInt(heaplist.get(childIndex).getPriority(), heaplist.get(j).getPriority()) >=0)
 			{
 				break;
 			}
@@ -104,7 +104,7 @@ public class HeapPriorityQueue
 		Job newest = new Job(name,description,priority);
 		heapArray.add(newest);
 
-		upheap(heapArray.size()-1);
+		upheap(heapArray.size()-1,heapArray);
 	}
 
 	public Job min()
@@ -119,17 +119,17 @@ public class HeapPriorityQueue
 		}
 	}
 
-	public Job removeMin()
-	{
+	public Job removeMin(ArrayList heaplist)
+	{	
 		if(isEmpty())
 		{
 			return null;
 		}
 		else
 		{
-			Job first = heapArray.get(0);
-			swap(0, heapArray.size()-1);	
-			heapArray.remove(heapArray.size()-1);
+			Job first = heaplist.get(0);
+			swap(0, heaplist.size()-1);	
+			heaplist.remove(heaplist.size()-1);
 			downheap(0);
 			return first;
 		}
@@ -141,30 +141,6 @@ public class HeapPriorityQueue
 		return heap2;
 	}
 			
-	public Job findJob(String name)
-	{
-		Job temp = heapArray.get(0);
-		for(int i = 1; i<heapArray.size();i++)
-		{
-			if(temp.getName().equals(name))
-			{
-				break;
-			}
-			else
-			{
-				temp = heapArray.get(i);
-			}
-		}
 
-		return temp;
-	}
-
-	public void changeJob(Job temp)
-	{
-		int previousPriority = temp.getPriority();
-		temp.setPriority(1);
-		upheap(previousPriority);
-		
-		
 
 }

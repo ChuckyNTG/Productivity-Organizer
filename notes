@@ -26,3 +26,12 @@ Remove function in ListSort. Have the user input the priority to remove. Easier 
 
 	---
 	ToDoList not being sorted. Need further debugging using jdb or check algorithm by duplication on a separate simpiler program.
+
+9-13
+
+Sorting works. Changed one number in for loop. Did not recomplie so changes did not take effect. Once recompiled, it worked fine.
+
+Going to switch over to using a heappriorityqueue. can sort in nlogn time. in insertion sort, can only sort in O(n^2) time
+
+	---
+	Changing HeapPriorityQueue to have a parameter of heaplist for its operations. Thus a heap can be held, and another modified and sorted. Two heaps will be kept at once in the heap priority queue.

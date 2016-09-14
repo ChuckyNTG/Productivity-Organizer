@@ -12,13 +12,13 @@ public class ListSort
 	public void add(Job job)
 	{
 		list.add(job);
-		this.sort();
+		sort();
 	}
 
 	public void remove(int priority)
 	{
 		list.remove(priority);
-		this.sort();
+		sort();
 	}
 
 	public void sort()
