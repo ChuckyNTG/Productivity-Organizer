@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class HeapPriorityQueue
 {
 	ArrayList<Job> heapArray = new ArrayList<Job>();
+	ArrayList<Job> outputArray = new ArrayList<Job>();
 
 	public static int compareInt(int a, int b)
 	{
@@ -50,19 +51,19 @@ public class HeapPriorityQueue
 		return right(j)<heapArray.size();
 	}
 	
-	public void swap(int i, int j,ArrayList heaplist)
+	public void swap(int i, int j)
 	{
-		Job temp = heaplist.get(i);
-		heaplist.set(i, heaplist.get(j));
-		heaplist.set(j, temp);
+		Job temp = heapArray.get(i);
+		heapArray.set(i, heapArray.get(j));
+		heapArray.set(j, temp);
 	}
 	
-	public void upheap(int j, ArrayList heaplist)
+	public void upheap(int j)
 	{
 		while(j>0)
 		{
 			int p = parent(j);
-			if(compareInt(heaplist.get(j).getPriority(),heaplist.get(p).getPriority()) >=0)
+			if(compareInt(heapArray.get(j).getPriority(),heapArray.get(p).getPriority()) >=0)
 			{
 				break;
 			}
@@ -74,7 +75,7 @@ public class HeapPriorityQueue
 		}
 	}
 
-	public void downheap(int j, ArrayList heaplist)
+	public void downheap(int j)
 	{
 		while(hasLeft(j))
 		{
@@ -83,12 +84,12 @@ public class HeapPriorityQueue
 			if(hasRight(j))
 			{
 				int rightIndex = right(j);
-				if(compareInt(heaplist.get(leftIndex).getPriority(),heaplist.get(rightIndex).getPriority()) > 0)
+				if(compareInt(heapArray.get(leftIndex).getPriority(),heapArray.get(rightIndex).getPriority()) > 0)
 				{
 					childIndex = rightIndex;
 				}
 			}
-			if(compareInt(heaplist.get(childIndex).getPriority(), heaplist.get(j).getPriority()) >=0)
+			if(compareInt(heapArray.get(childIndex).getPriority(), heapArray.get(j).getPriority()) >=0)
 			{
 				break;
 			}
@@ -119,7 +120,7 @@ public class HeapPriorityQueue
 		}
 	}
 
-	public Job removeMin(ArrayList heaplist)
+	public Job removeMin()
 	{	
 		if(isEmpty())
 		{
@@ -127,18 +128,19 @@ public class HeapPriorityQueue
 		}
 		else
 		{
-			Job first = heaplist.get(0);
-			swap(0, heaplist.size()-1);	
-			heaplist.remove(heaplist.size()-1);
+			Job first = heapArray.get(0);
+			swap(0, heapArray.size()-1);	
+			heapArray.remove(heapArray.size()-1);
 			downheap(0);
 			return first;
 		}
 	}
 
+	public 
+
 	public ArrayList<Job> getHeap()
 	{
-		ArrayList<Job> heap2 = heapArray;
-		return heap2;
+		return outputArray;
 	}
 			
 

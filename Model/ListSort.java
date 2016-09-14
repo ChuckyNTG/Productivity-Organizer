@@ -17,8 +17,12 @@ public class ListSort
 
 	public void remove(int priority)
 	{
-		list.remove(priority);
+		list.remove(priority-1);
 		sort();
+		for (Job job: list)
+		{	
+			job.setPriority(list.indexOf(job)+1);
+		}
 	}
 
 	public void sort()

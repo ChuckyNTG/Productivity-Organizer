@@ -35,3 +35,10 @@ Going to switch over to using a heappriorityqueue. can sort in nlogn time. in in
 
 	---
 	Changing HeapPriorityQueue to have a parameter of heaplist for its operations. Thus a heap can be held, and another modified and sorted. Two heaps will be kept at once in the heap priority queue.
+
+9-14
+
+Need three arrays to store data. One to keep heap, another to remove min, and another to output. Consequently, methods hasLeft,hasRight,removeMin, downheap to adjust for the remove min heap.
+
+	---
+	Sorting by heap not needed right now. Since were only sorting 10 objects, we can optomize later. For later, the an array should insert into the heap (must insert at end of heap) and then upheap after each level is inserted. This will ensure jobs can be removed then added back into the heap and resorted.Work for later.
