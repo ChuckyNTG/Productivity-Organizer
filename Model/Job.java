@@ -3,6 +3,7 @@ public class Job
 	private String _name;
 	private String _description;
 	private int _priority;
+	private Date _dueDate;	
 
 	public Job(String name, String description, int priority)
 	{
@@ -11,6 +12,7 @@ public class Job
 		_priority = priority;
 
 	}
+
 	public void setName(String name)
 	{
 		_name = name;

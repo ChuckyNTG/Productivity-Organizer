@@ -42,3 +42,6 @@ Need three arrays to store data. One to keep heap, another to remove min, and an
 
 	---
 	Sorting by heap not needed right now. Since were only sorting 10 objects, we can optomize later. For later, the an array should insert into the heap (must insert at end of heap) and then upheap after each level is inserted. This will ensure jobs can be removed then added back into the heap and resorted.Work for later.
+
+9-20
+Added a date field to Job class
