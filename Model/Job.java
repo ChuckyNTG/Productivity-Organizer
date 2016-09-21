@@ -1,3 +1,4 @@
+//this class is for all the tasks in the to do list
 public class Job
 {
 	private String _name;
