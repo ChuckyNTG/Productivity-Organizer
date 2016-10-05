@@ -16,6 +16,7 @@ public class ToDoList
 		String priority = kbd1.next();
 		kbd1.nextLine();
 		
+				
 		Job newest = new Job(name,description,priority);
 		list.add(newest);
 		System.out.println("Job successfully added.");
@@ -33,6 +34,17 @@ public class ToDoList
 	public void print()
 	{
 		list.printList();
+	}
+
+	public Date dateSetup(int year, int month, int day,int hour
+				int minute, int second)
+	{
+		Calendar date = new Calendar.Builder()
+				.setCalendarType("gregory")
+				.setDate(year,month-1,day)
+				.setTimeofDay(hour,minute,second)
+				.build();
+
 	}
 	public static void main(String[] args)
 	{
