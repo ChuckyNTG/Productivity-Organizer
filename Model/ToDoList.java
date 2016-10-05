@@ -13,7 +13,7 @@ public class ToDoList
 		System.out.print("Enter the description of the job: ");
 		String description = kbd1.nextLine();
 		System.out.print("Enter the priority of the job: ");
-		int priority = kbd1.nextInt();
+		String priority = kbd1.next();
 		kbd1.nextLine();
 		
 		Job newest = new Job(name,description,priority);

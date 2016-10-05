@@ -4,15 +4,15 @@ public class Job
 {
 	private String _name;
 	private String _description;
-	private int _priority;
+	private String _priority;
 	private Date _dueDate;	
 
-	public Job(String name, String description, int priority)
+	public Job(String name, String description, String priority,Date date)
 	{
 		_name = name;
 		_description = description;
 		_priority = priority;
-
+		_dueDate = date;
 	}
 
 	public void setName(String name)
@@ -38,15 +38,26 @@ public class Job
 
 	
 
-	public void setPriority(int p)
+	public void setPriority(String p)
 	{
 		_priority = p;
 	}
 	
-	public int getPriority()
+	public String getPriority()
 	{
 		return _priority;
 	}
+
+	public void setDate(int year, int month, int day, int hour, int minute,
+				int second)
+	{
+		Calendar date = new Calendar.Builder().setCalendarType("gregory")
+				.setDate(year,month,day)
+				.setTimeOfDay(hour,minute,second)
+				.build();
+
+		_dueDate=date;
+	}			
 }	
 	
 

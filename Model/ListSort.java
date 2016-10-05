@@ -15,14 +15,10 @@ public class ListSort
 		sort();
 	}
 
-	public void remove(int priority)
+	public void remove(int entry) 
 	{
-		list.remove(priority-1);
+		list.remove(entry-1);
 		sort();
-		for (Job job: list)
-		{	
-			job.setPriority(list.indexOf(job)+1);
-		}
 	}
 
 	public void sort()
@@ -36,7 +32,8 @@ public class ListSort
 	public void inSort(int position, Job value)
 	{
 		int j = position -1;
-		while(j>=0 && list.get(j).getPriority()>value.getPriority())
+
+		while(j>=0 && list.get(j).getDate()>value.getDate())
 		{
 			list.set(j+1,list.get(j));
 			j=j-1;
@@ -53,6 +50,7 @@ public class ListSort
 			System.out.println("Priority: " + job.getPriority());
 			System.out.println("Name: " + job.getName());
 			System.out.println("Description: " + job.getDescription());
+			System.out.println("Date due: " + job.getDate());
 			System.out.println(" ");
 						
 		}
