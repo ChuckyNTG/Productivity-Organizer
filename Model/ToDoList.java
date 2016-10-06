@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.Calendar;
+import java.util.Calendar.Builder;
 
 public class ToDoList
 {
@@ -12,19 +14,27 @@ public class ToDoList
 		String name = kbd1.nextLine();
 		System.out.print("Enter the description of the job: ");
 		String description = kbd1.nextLine();
-		System.out.print("Enter the priority of the job: ");
+		System.out.print("Enter the priority of the job (low,medium,high): ");
 		String priority = kbd1.next();
+		System.out.print("Enter the due date of the task(year,month,day): ");
+		int year = kbd1.nextInt();
+		int month = kbd1.nextInt();
+		int day = kbd1.nextInt();
+
+		month = month -1;
+
+		Calendar date = dateSetup(year,month,day); 
 		kbd1.nextLine();
 		
 				
-		Job newest = new Job(name,description,priority);
+		Job newest = new Job(name,description,priority,date);
 		list.add(newest);
 		System.out.println("Job successfully added.");
 	}
 
 	public void remove()
 	{
-		System.out.print("Enter the priority of the job you want removed: ");
+		System.out.print("Enter the order of the job you want removed: ");
 		int priority = kbd1.nextInt();
 		list.remove(priority);
 		System.out.println("The job has been removed.");
@@ -36,15 +46,25 @@ public class ToDoList
 		list.printList();
 	}
 
-	public Date dateSetup(int year, int month, int day,int hour
-				int minute, int second)
+	public Calendar dateSetup(int year, int month, int day,int hour,int minute,int second)
 	{
 		Calendar date = new Calendar.Builder()
 				.setCalendarType("gregory")
-				.setDate(year,month-1,day)
-				.setTimeofDay(hour,minute,second)
+				.setDate(year,month,day)
+				.setTimeOfDay(hour,minute,second)
+				.build();
+	
+		return date;
+	}
+	
+	public Calendar dateSetup(int year, int month, int day)
+	{
+		Calendar date = new Calendar.Builder()
+				.setCalendarType("gregory")
+				.setDate(year,month,day)
 				.build();
 
+		return date;
 	}
 	public static void main(String[] args)
 	{
@@ -54,7 +74,7 @@ public class ToDoList
 		boolean running = true;
 		while(running)
 		{
-			System.out.print("Please enter the operation you'd like to perform: ");
+			System.out.print("Please enter the operation you'd like to perform(add,remove,print,quit): ");
 			String choice=kbd2.next();
 			
 			switch (choice)

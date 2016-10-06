@@ -5,9 +5,9 @@ public class Job
 	private String _name;
 	private String _description;
 	private String _priority;
-	private Date _dueDate;	
+	private Calendar _dueDate;	
 
-	public Job(String name, String description, String priority,Date date)
+	public Job(String name, String description, String priority,Calendar date)
 	{
 		_name = name;
 		_description = description;
@@ -48,8 +48,7 @@ public class Job
 		return _priority;
 	}
 
-	public void setDate(int year, int month, int day, int hour, int minute,
-				int second)
+	public void setDate(int year, int month, int day, int hour, int minute,int second)
 	{
 		Calendar date = new Calendar.Builder().setCalendarType("gregory")
 				.setDate(year,month,day)
@@ -57,6 +56,11 @@ public class Job
 				.build();
 
 		_dueDate=date;
+	}
+	
+	public Calendar getDate()
+	{
+		return _dueDate;
 	}			
 }	
 	

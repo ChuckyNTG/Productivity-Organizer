@@ -33,7 +33,7 @@ public class ListSort
 	{
 		int j = position -1;
 
-		while(j>=0 && list.get(j).getDate()>value.getDate())
+		while(j>=0 && list.get(j).getDate().getTime().compareTo(value.getDate().getTime())>0)
 		{
 			list.set(j+1,list.get(j));
 			j=j-1;
@@ -50,7 +50,7 @@ public class ListSort
 			System.out.println("Priority: " + job.getPriority());
 			System.out.println("Name: " + job.getName());
 			System.out.println("Description: " + job.getDescription());
-			System.out.println("Date due: " + job.getDate());
+			System.out.println("Date due: " + job.getDate().getTime());
 			System.out.println(" ");
 						
 		}
