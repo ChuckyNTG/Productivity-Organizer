@@ -15,7 +15,7 @@ public class ToDoList
 		System.out.print("Enter the description of the job: ");
 		String description = kbd1.nextLine();
 		System.out.print("Enter the priority of the job (low,medium,high): ");
-		String priority = kbd1.next();
+		String priorityString = kbd1.next();
 		System.out.print("Enter the due date of the task(year,month,day): ");
 		int year = kbd1.nextInt();
 		int month = kbd1.nextInt();
@@ -25,8 +25,13 @@ public class ToDoList
 
 		Calendar date = dateSetup(year,month,day); 
 		kbd1.nextLine();
-		
-				
+
+		int priority = 1;
+		if(priorityString.equalsIgnoreCase("high"))
+			priority = 3;
+		if(priorityString.equalsIgnoreCase("medium"))
+			priority = 2;
+
 		Job newest = new Job(name,description,priority,date);
 		list.add(newest);
 		System.out.println("Job successfully added.");

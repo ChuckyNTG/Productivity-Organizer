@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Sorttest
 {
@@ -6,11 +7,11 @@ public class Sorttest
 	ArrayList<Job> list = new ArrayList<Job>();
 	public Sorttest()
 	{
-		Job newest1 = new Job("Homework","Doinghomework",3);
+		Job newest1 = new Job("Homework","Doinghomework", (byte) 3, Calendar.getInstance());
 		list.add(newest1);
-		Job newest2 = new Job("Reading","Reading",1);
+		Job newest2 = new Job("Reading","Reading", (byte) 2, Calendar.getInstance());
 		list.add(newest2);
-		Job newest3 = new Job("Writing","writing",2);
+		Job newest3 = new Job("Writing","writing", (byte) 1, Calendar.getInstance());
 		list.add(newest3);
 	}
 	public void sort()
@@ -45,4 +46,5 @@ public class Sorttest
 		test.sort();
 		test.print();
 	}
+
 }

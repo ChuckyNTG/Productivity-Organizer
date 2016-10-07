@@ -4,10 +4,10 @@ public class Job
 {
 	private String _name;
 	private String _description;
-	private String _priority;
+	private int _priority;
 	private Calendar _dueDate;	
 
-	public Job(String name, String description, String priority,Calendar date)
+	public Job(String name, String description, int priority,Calendar date)
 	{
 		_name = name;
 		_description = description;
@@ -38,12 +38,12 @@ public class Job
 
 	
 
-	public void setPriority(String p)
+	public void setPriority(int p)
 	{
 		_priority = p;
 	}
 	
-	public String getPriority()
+	public int getPriority()
 	{
 		return _priority;
 	}

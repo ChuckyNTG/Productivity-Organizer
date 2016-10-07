@@ -1,7 +1,7 @@
 import java.util.ArrayList;
-
 public class HeapPriorityQueue
 {
+
 	ArrayList<Job> heapArray = new ArrayList<Job>();
 	ArrayList<Job> outputArray = new ArrayList<Job>();
 
@@ -100,14 +100,15 @@ public class HeapPriorityQueue
 		}
 	}
 
-	public void insert(String name, String description,int priority)
+
+	/*public void insert(String name, String description,int priority)
 	{
 		Job newest = new Job(name,description,priority);
 		heapArray.add(newest);
 
 		upheap(heapArray.size()-1,heapArray);
 	}
-
+*/
 	public Job min()
 	{
 		if(isEmpty())
@@ -136,7 +137,6 @@ public class HeapPriorityQueue
 		}
 	}
 
-	public 
 
 	public ArrayList<Job> getHeap()
 	{
