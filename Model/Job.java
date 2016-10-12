@@ -1,51 +1,53 @@
+import com.sun.javafx.collections.SortableList;
+
 import java.util.Calendar;
+import java.util.HashMap;
+
 //this class is for all the tasks in the to do list
 public class Job
 {
-	private String _name;
-	private String _description;
-	private int _priority;
-	private Calendar _dueDate;	
+	private HashMap<String, Comparable> _attributes;
 
 	public Job(String name, String description, int priority,Calendar date)
 	{
-		_name = name;
-		_description = description;
-		_priority = priority;
-		_dueDate = date;
+		_attributes = new HashMap<>();
+		_attributes.put("name", name);
+		_attributes.put("description", description);
+		_attributes.put("priority", priority);
+		_attributes.put("date", date);
 	}
 
 	public void setName(String name)
 	{
-		_name = name;
+		_attributes.put("name", name);
 	}
 
 	public String getName()
 	{
-		return _name;
+		return (String) _attributes.get("name");
 	}
 
 	
-	public void setDescription(String descript)
+	public void setDescription(String description)
 	{
-		_description = descript;
+		_attributes.put("description", description);
 	}
 	
 	public String getDescription()
 	{
-		return _description;
+		return (String) _attributes.get("description");
 	}
 
 	
 
-	public void setPriority(int p)
+	public void setPriority(int priority)
 	{
-		_priority = p;
+		_attributes.put("priority", priority);
 	}
 	
 	public int getPriority()
 	{
-		return _priority;
+		return (Integer) _attributes.get("priority");
 	}
 
 	public void setDate(int year, int month, int day, int hour, int minute,int second)
@@ -55,13 +57,19 @@ public class Job
 				.setTimeOfDay(hour,minute,second)
 				.build();
 
-		_dueDate=date;
+		_attributes.put("date", date);
 	}
 	
 	public Calendar getDate()
 	{
-		return _dueDate;
-	}			
+		return (Calendar) _attributes.get("date");
+	}
+
+	public Comparable getAtrribute(String attribute)
+    {
+        return _attributes.get(attribute);
+    }
+
 }	
 	
 
