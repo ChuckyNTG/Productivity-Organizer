@@ -54,5 +54,16 @@ public class ListSort
 			System.out.println(" ");
 						
 		}
-	}			
+	}
+
+	@Override
+	public String toString(){
+		String out = "";
+		for(Job job : list){
+			if(out.length() >= 1)
+				out += '\n';
+			out += job.toString();
+		}
+		return out;
+	}
 }

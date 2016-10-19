@@ -70,6 +70,16 @@ public class Job
         return _attributes.get(attribute);
     }
 
+    @Override
+	public String toString(){
+		String out = "";
+		for(String key : _attributes.keySet()){
+			if(out.length() > 1)
+				out += "|";
+			out += key + "~" + _attributes.get(key);
+		}
+		return out;
+	}
 }	
 	
 
