@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 public class Sorttest
 {
@@ -14,24 +16,22 @@ public class Sorttest
 		Job newest3 = new Job("Writing","writing", (byte) 1, Calendar.getInstance());
 		list.add(newest3);
 	}
-	public void sort()
-        {
-                for (int i=1; i<list.size();i++)
-                {
-                        inSort(i,list.get(i));
-                }
-        }
 
-        public void inSort(int position, Job value)
-        {
-                int j = position -1;
-                while(j>=0 && list.get(j).getPriority()>value.getPriority())
-                {
-                        list.set(j+1,list.get(j));
-                        j=j-1;
-                }
-                list.set(j+1,value);
-        }
+	public void sort()
+	{
+		sort("date");
+	}
+
+	public void sort(String attribute)
+	{
+		list.sort(new Comparator<Job>() {
+			@Override
+			public int compare(Job o1, Job o2) {
+				return o1.getAtrribute(attribute).compareTo(o2.getAtrribute(attribute));
+			}
+		});
+	}
+
 	
 	public void print()
 	{
