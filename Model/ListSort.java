@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class ListSort
 {
@@ -23,12 +24,19 @@ public class ListSort
 
 	public void sort()
 	{
-		for (int i=1; i<list.size();i++)
-		{
-			inSort(i,list.get(i));
-		}
+		sort("date");
 	}
-	
+
+	public void sort(String attribute)
+	{
+		list.sort(new Comparator<Job>() {
+			@Override
+			public int compare(Job job, Job t1) {
+				return job.getAtrribute(attribute).compareTo(t1.getAtrribute(attribute));
+			}
+		});
+	}
+
 	public void inSort(int position, Job value)
 	{
 		int j = position -1;
