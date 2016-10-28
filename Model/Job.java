@@ -1,6 +1,6 @@
 import java.util.Calendar;
 import java.util.HashMap;
-
+import java.util.Random;
 //this class is for all the tasks in the to do list
 public class Job
 {
@@ -13,8 +13,20 @@ public class Job
 		_attributes.put("description", description);
 		_attributes.put("priority", priority);
 		_attributes.put("date", date);
-	}
 
+		/*Pseudo random ID for each job. Each job can be located by the ID instead of having
+		to enter a parameter to search for the job by. */
+		Random generator = new Random();
+		//Decent range of probablity for duplicates for now
+		int random = generator.nextInt(10000);
+		_attributes.put("ID",random);
+	}
+	
+	public int getID()
+	{
+		return (int) _attributes.get("ID"); 	
+	}
+	
 	public void setName(String name)
 	{
 		_attributes.put("name", name);
@@ -67,8 +79,6 @@ public class Job
     {
         return _attributes.get(attribute);
     }
-
-    @Override
 	public String toString(){
 		String out = "";
 		for(String key : _attributes.keySet()){

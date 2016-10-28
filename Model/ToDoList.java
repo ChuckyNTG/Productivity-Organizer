@@ -45,7 +45,17 @@ public class ToDoList
 		System.out.println("The job has been removed.");
 		
 	}
-
+	/*	
+	//Used to change a job 
+	public void change(String name, String attribute, Object value)
+	{
+		switch(attribute){
+			case "name":
+			String newName = (String) value;
+			list.get
+			
+	*/
+		
 	public void print()
 	{
 		list.printList();

@@ -36,7 +36,7 @@ public class ListSort
 			}
 		});
 	}
-
+	/*
 	public void inSort(int position, Job value)
 	{
 		int j = position -1;
@@ -48,19 +48,14 @@ public class ListSort
 		}
 		list.set(j+1,value);
 	}
-
+	*/
 	public void printList()
 	{
 		System.out.println("The details of the list:");
 	
 		for(Job job:list)
 		{
-			System.out.println("Priority: " + job.getPriority());
-			System.out.println("Name: " + job.getName());
-			System.out.println("Description: " + job.getDescription());
-			System.out.println("Date due: " + job.getDate().getTime());
-			System.out.println(" ");
-						
+			System.out.println(job.toString());				
 		}
 	}
 
