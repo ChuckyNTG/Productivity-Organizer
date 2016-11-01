@@ -45,3 +45,6 @@ Need three arrays to store data. One to keep heap, another to remove min, and an
 
 9-20
 Added a date field to Job class
+
+11-1
+Need to implement case for change in main method. Also need to make sure when user enters wrong ID that the program responds accordingly.Will look at task history and reminders and last change date later

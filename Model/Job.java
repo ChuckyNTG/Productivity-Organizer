@@ -6,11 +6,17 @@ public class Job
 {
 	private HashMap<String, Comparable> _attributes;
 
-	public Job(String name, String description, int priority,Calendar date)
+	public Job(String name, String description,String priorityString,Calendar date)
 	{
 		_attributes = new HashMap<>();
 		_attributes.put("name", name);
 		_attributes.put("description", description);
+
+		int priority = 1;
+		if(priorityString.equalsIgnoreCase("high"))
+			priority = 3;
+		if(priorityString.equalsIgnoreCase("medium"))
+			priority = 2;
 		_attributes.put("priority", priority);
 		_attributes.put("date", date);
 
@@ -50,8 +56,14 @@ public class Job
 
 	
 
-	public void setPriority(int priority)
+	public void setPriority(String priorityString)
 	{
+		
+		int priority = 1;
+		if(priorityString.equalsIgnoreCase("high"))
+			priority = 3;
+		if(priorityString.equalsIgnoreCase("medium"))
+			priority = 2;
 		_attributes.put("priority", priority);
 	}
 	

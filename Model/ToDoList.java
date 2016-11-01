@@ -26,36 +26,52 @@ public class ToDoList
 		Calendar date = dateSetup(year,month,day); 
 		kbd1.nextLine();
 
-		int priority = 1;
-		if(priorityString.equalsIgnoreCase("high"))
-			priority = 3;
-		if(priorityString.equalsIgnoreCase("medium"))
-			priority = 2;
-
-		Job newest = new Job(name,description,priority,date);
+		static Job newest = new Job(name,description,priorityString,date);
 		list.add(newest);
 		System.out.println("Job successfully added.");
 	}
 
 	public void remove()
 	{
-		System.out.print("Enter the order of the job you want removed: ");
-		int priority = kbd1.nextInt();
-		list.remove(priority);
+		//Question: If job is static and removed from one datastructure (arraylist i.e.)
+		//then would the java garbage collector delete and remove it from the other 
+		//data structure?
+
+		System.out.print("Enter the postion of the job you want removed: ");
+		int position = kbd1.nextInt();
+		int id = kbd1.nextInt();
+		list.remove(position, id);
 		System.out.println("The job has been removed.");
 		
 	}
-	/*	
-	//Used to change a job 
-	public void change(String name, String attribute, Object value)
+	//Used to change one of a jobs fields
+	public void change()
 	{
-		switch(attribute){
-			case "name":
-			String newName = (String) value;
-			list.get
-			
-	*/
 		
+		System.out.print("Enter the id you wanna change: ");
+		int id = kbd1.nextInt();
+		
+		System.out.print("Enter the field you wanna change: ");
+		String textField = kbd1.nextLine(); 	
+		
+		System.out.print("Enter the new text: "):
+		String newText = kbd1.nextLine();
+
+		switch(textField){
+			case "name":
+				list.getJob(id).setName(newText);
+				break;
+			case "description":
+				list.getJob(id).setDescription(newText);
+				break;
+			case "priority":
+				list.getJob(id).setPriority(newText);
+			default:
+				System.out.println("Change could not be made due to invalid field name.");
+				break;
+		}
+
+	}	
 	public void print()
 	{
 		list.printList();
@@ -89,7 +105,7 @@ public class ToDoList
 		boolean running = true;
 		while(running)
 		{
-			System.out.print("Please enter the operation you'd like to perform(add,remove,print,quit): ");
+			System.out.print("Please enter the operation you'd like to perform(add,remove,change,print,quit): ");
 			String choice=kbd2.next();
 			
 			switch (choice)
