@@ -118,10 +118,6 @@ public class ToDoList
 					toDoList.remove();
 					running=true;
 					break;
-				case "change":
-					toDoList.change();
-					running=true;
-					break;
 				case "print":
 					toDoList.print();
 					running=true;

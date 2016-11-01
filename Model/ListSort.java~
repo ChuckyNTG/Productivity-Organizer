@@ -33,7 +33,7 @@ public class ListSort
 		sort();
 	}
 	
-	public Job getJob(int id)
+	public int getJob(int id)
 	{
 		return _jobs.get(id);
 	}
