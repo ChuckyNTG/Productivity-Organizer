@@ -16,14 +16,8 @@ public class ToDoList
 		String description = kbd1.nextLine();
 		System.out.print("Enter the priority of the job (low,medium,high): ");
 		String priorityString = kbd1.next();
-		System.out.print("Enter the due date of the task(year,month,day): ");
-		int year = kbd1.nextInt();
-		int month = kbd1.nextInt();
-		int day = kbd1.nextInt();
 
-		month = month -1;
-
-		Calendar date = dateSetup(year,month,day); 
+		Calendar date = dateSetup();
 		kbd1.nextLine();
 
 		Job newest = new Job(name,description,priorityString,date);
@@ -39,6 +33,8 @@ public class ToDoList
 
 		System.out.print("Enter the postion of the job you want removed: ");
 		int position = kbd1.nextInt();
+		kbd1.nextLine();
+		System.out.print("Enter the id of the job you want removed: ");
 		int id = kbd1.nextInt();
 		list.remove(position, id);
 		System.out.println("The job has been removed.");
@@ -50,6 +46,7 @@ public class ToDoList
 		
 		System.out.print("Enter the id you wanna change: ");
 		int id = kbd1.nextInt();
+		kbd1.nextLine();
 		
 		System.out.print("Enter the field you wanna change: ");
 		String textField = kbd1.nextLine(); 	
@@ -57,15 +54,25 @@ public class ToDoList
 		System.out.print("Enter the new text: ");
 		String newText = kbd1.nextLine();
 
-		switch(textField){
+		switch(textField)
+		{
 			case "name":
 				list.getJob(id).setName(newText);
+				list.sort();
 				break;
 			case "description":
 				list.getJob(id).setDescription(newText);
+				list.sort();
 				break;
 			case "priority":
 				list.getJob(id).setPriority(newText);
+				list.sort();
+				break;
+			case "date":
+				Calendar date = dateSetup();
+				list.getJob(id).setDate(date);
+				list.sort();
+				break;
 			default:
 				System.out.println("Change could not be made due to invalid field name.");
 				break;
@@ -76,9 +83,15 @@ public class ToDoList
 	{
 		list.printList();
 	}
-
+	/*
 	public Calendar dateSetup(int year, int month, int day,int hour,int minute,int second)
 	{
+		System.out.print("Enter the due date of the task(year,month,day): ");
+		int year = kbd1.nextInt();
+		int month = kbd1.nextInt();
+		int day = kbd1.nextInt();
+
+		month = month -1;
 		Calendar date = new Calendar.Builder()
 				.setCalendarType("gregory")
 				.setDate(year,month,day)
@@ -87,9 +100,15 @@ public class ToDoList
 	
 		return date;
 	}
-	
-	public Calendar dateSetup(int year, int month, int day)
+	*/	
+	public Calendar dateSetup()
 	{
+		System.out.print("Enter the due date of the task(year,month,day): ");
+		int year = kbd1.nextInt();
+		int month = kbd1.nextInt();
+		int day = kbd1.nextInt();
+
+		month = month -1;
 		Calendar date = new Calendar.Builder()
 				.setCalendarType("gregory")
 				.setDate(year,month,day)

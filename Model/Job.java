@@ -72,13 +72,8 @@ public class Job
 		return (Integer) _attributes.get("priority");
 	}
 
-	public void setDate(int year, int month, int day, int hour, int minute,int second)
+	public void setDate(Calendar date)
 	{
-		Calendar date = new Calendar.Builder().setCalendarType("gregory")
-				.setDate(year,month,day)
-				.setTimeOfDay(hour,minute,second)
-				.build();
-
 		_attributes.put("date", date);
 	}
 	
@@ -96,7 +91,14 @@ public class Job
 		for(String key : _attributes.keySet()){
 			if(out.length() > 1)
 				out += "|";
-			out += key + "~" + _attributes.get(key);
+			if(key.equalsIgnoreCase("date"))
+			{
+				out += key + "~" + this.getDate().getTime();
+			}	
+			else
+			{
+				out += key + "~" + _attributes.get(key);
+			}
 		}
 		return out;
 	}
