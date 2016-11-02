@@ -1,3 +1,4 @@
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -52,6 +53,41 @@ public class ListSort
 			}
 		});
 	}
+
+	public ArrayList<Job> sort(String attribute, Filter[] filters)
+	{
+		Filter combined = new Filter()
+		{
+			@Override
+			public boolean satisfies(Job job)
+			{
+				for (Filter f : filters)
+					if (!f.satisfies(job))
+						return false;
+				return true;
+			}
+		};
+		return sort(attribute, combined);
+	}
+
+	public ArrayList<Job> sort(String attribute, Filter filter)
+	{
+		ArrayList<Job> postFilter = new ArrayList<>();
+		for(Job job : list)
+		{
+			if(filter.satisfies(job))
+				postFilter.add(job);
+
+		}
+		postFilter.sort(new Comparator<Job>() {
+			@Override
+			public int compare(Job o1, Job o2) {
+				return o1.getAtrribute(attribute).compareTo(o2.getAtrribute(attribute));
+			}
+		});
+		return postFilter;
+	}
+
 	/*
 	public void inSort(int position, Job value)
 	{
