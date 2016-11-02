@@ -33,15 +33,11 @@ public class ListSort
 		sort();
 	}
 	
-	public int getJob(int id)
+	public Job getJob(int id)
 	{
 		return _jobs.get(id);
 	}
 
-	public void sort()
-	{
-		sort("date");
-	}
 
 	public void sort(String attribute)
 	{

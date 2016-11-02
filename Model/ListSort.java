@@ -22,7 +22,6 @@ public class ListSort
 		int id = job.getID();
 		_jobs.put(id,job);
 
-		sort();
 	}
 
 	public void remove(int entry, int ID) 
@@ -30,7 +29,6 @@ public class ListSort
 		list.remove(entry-1);
 		_jobs.remove(ID);	
 
-		sort();
 	}
 	
 	public Job getJob(int id)
@@ -38,10 +36,6 @@ public class ListSort
 		return _jobs.get(id);
 	}
 
-	public void sort()
-	{
-		sort("date");
-	}
 
 	public void sort(String attribute)
 	{
