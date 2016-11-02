@@ -1,6 +1,5 @@
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Random;
 //this class is for all the tasks in the to do list
 public class Job
 {
@@ -21,10 +20,6 @@ public class Job
 		_attributes.put("priority", priority);
 		_attributes.put("date", date);
 
-		/*Pseudo random ID for each job. Each job can be located by the ID instead of having
-		to enter a parameter to search for the job by. */
-		Random generator = new Random();
-		//Decent range of probablity for duplicates for now
 		int id = idAccumulator;
 		idAccumulator++;
 		_attributes.put("ID",id);
