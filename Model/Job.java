@@ -5,6 +5,7 @@ import java.util.Random;
 public class Job
 {
 	private HashMap<String, Comparable> _attributes;
+	private static int idAccumulator = 0;
 
 	public Job(String name, String description,String priorityString,Calendar date)
 	{
@@ -24,8 +25,9 @@ public class Job
 		to enter a parameter to search for the job by. */
 		Random generator = new Random();
 		//Decent range of probablity for duplicates for now
-		int random = generator.nextInt(10000);
-		_attributes.put("ID",random);
+		int id = idAccumulator;
+		idAccumulator++;
+		_attributes.put("ID",id);
 	}
 	
 	public int getID()
