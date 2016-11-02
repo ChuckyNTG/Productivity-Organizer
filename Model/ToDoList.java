@@ -58,20 +58,16 @@ public class ToDoList
 		{
 			case "name":
 				list.getJob(id).setName(newText);
-				list.sort();
 				break;
 			case "description":
 				list.getJob(id).setDescription(newText);
-				list.sort();
 				break;
 			case "priority":
 				list.getJob(id).setPriority(newText);
-				list.sort();
 				break;
 			case "date":
 				Calendar date = dateSetup();
 				list.getJob(id).setDate(date);
-				list.sort();
 				break;
 			default:
 				System.out.println("Change could not be made due to invalid field name.");
@@ -79,6 +75,13 @@ public class ToDoList
 		}
 
 	}	
+	public void sort()
+	{
+		System.out.println("Enter the parameter you want to sort by: ");
+		String sortParameter = kbd1.nextLine();
+		list.sort(sortParameter);
+	}
+
 	public void print()
 	{
 		list.printList();
@@ -141,6 +144,10 @@ public class ToDoList
 					toDoList.change();
 					running=true;
 					break;
+				case "sort":
+					toDoList.sort();
+					running=true;
+					break;	
 				case "print":
 					toDoList.print();
 					running=true;
