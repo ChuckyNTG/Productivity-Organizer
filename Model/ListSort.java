@@ -10,10 +10,13 @@ public class ListSort
 	//Accessing jobs
 	private HashMap<Integer,Job> _jobs;
 	
+	private ArrayList<Job> oldJobs;
+
 	public ListSort()
 	{
 		list = new ArrayList<Job>();
 		_jobs = new HashMap<Integer,Job>();
+		oldJobs = new ArrayList<Job>();
 	}
 	
 	public void add(Job job)
@@ -82,19 +85,6 @@ public class ListSort
 		return postFilter;
 	}
 
-	/*
-	public void inSort(int position, Job value)
-	{
-		int j = position -1;
-
-		while(j>=0 && list.get(j).getDate().getTime().compareTo(value.getDate().getTime())>0)
-		{
-			list.set(j+1,list.get(j));
-			j=j-1;
-		}
-		list.set(j+1,value);
-	}
-	*/
 	public void printList()
 	{
 		System.out.println("The details of the list:");
