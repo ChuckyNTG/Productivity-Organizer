@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 import java.util.Calendar;
 import java.util.Calendar.Builder;
@@ -82,6 +84,35 @@ public class ToDoList
 		list.sort(sortParameter);
 	}
 
+	public void filter(){
+		System.out.println("Enter the parameter you want to filter based on: ");
+		String filterParameter = kbd1.nextLine();
+		System.out.println("Enter the minimum value");
+		Comparable minimum = kbd1.nextLine();
+		try{
+			minimum = Integer.parseInt((String) minimum);
+		}
+		catch(Exception e){};
+
+		System.out.println("Enter the maximum value");
+		Comparable maximum = kbd1.nextLine();
+		try{
+			maximum = Integer.parseInt((String) maximum);
+		}
+		catch(Exception e){};
+
+		System.out.println("Enter the parameter to sort the results by:");
+		String sortParameter = kbd1.nextLine();
+
+		System.out.println("Smallest first or largest first? (Enter smallest or largest)");
+		Comparator comparator = kbd1.nextLine().equalsIgnoreCase("largest") ? ListSort.LARGESTFIRST : ListSort.SMALLESTFIRST;
+
+		ArrayList<Job> out = list.sort(sortParameter,  new Filter.RangeFilter(filterParameter, minimum, maximum), comparator);
+		for(int i = 0; i < out.size(); i ++)
+			System.out.println(out.get(i));
+
+	}
+
 	public void print()
 	{
 		list.printList();
@@ -127,7 +158,7 @@ public class ToDoList
 		boolean running = true;
 		while(running)
 		{
-			System.out.print("Please enter the operation you'd like to perform(add,remove,change,print,quit): ");
+			System.out.print("Please enter the operation you'd like to perform(add,remove,change,print,sort,filter,quit): ");
 			String choice=kbd2.next();
 			
 			switch (choice)
@@ -150,6 +181,10 @@ public class ToDoList
 					break;	
 				case "print":
 					toDoList.print();
+					running=true;
+					break;
+				case "filter":
+					toDoList.filter();
 					running=true;
 					break;
 				case "quit":
