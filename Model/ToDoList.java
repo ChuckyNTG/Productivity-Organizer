@@ -85,21 +85,34 @@ public class ToDoList
 	}
 
 	public void filter(){
-		System.out.println("Enter the parameter you want to filter based on: ");
+
+
+		System.out.println("Enter the parameter you want to filter based on:");
 		String filterParameter = kbd1.nextLine();
-		System.out.println("Enter the minimum value");
+		System.out.println("Enter the minimum value (Leave blank for no minimum)");
 		Comparable minimum = kbd1.nextLine();
+		minimum = minimum.equals("") ? null : minimum;
 		try{
 			minimum = Integer.parseInt((String) minimum);
 		}
 		catch(Exception e){};
 
-		System.out.println("Enter the maximum value");
+		System.out.println("Enter the maximum value (Leave blank for no maximum)");
 		Comparable maximum = kbd1.nextLine();
+		maximum = maximum .equals("") ? null : maximum;
 		try{
 			maximum = Integer.parseInt((String) maximum);
 		}
 		catch(Exception e){};
+		Filter rangeFilter = new Filter.RangeFilter(filterParameter, minimum, maximum);
+
+		System.out.println("Enter a keyword that the job must contain (Leave blank for no keyword required):");
+		String keyword = kbd1.nextLine().trim();
+		System.out.println("Which attribute (name, description, etc.) should the keyword be in? (Leave blank for any)");
+		String attribute = kbd1.nextLine();
+		attribute = attribute.equals("") ? null : attribute;
+        Filter keywordFilter = new Filter.KeywordFilter(attribute, keyword);
+
 
 		System.out.println("Enter the parameter to sort the results by:");
 		String sortParameter = kbd1.nextLine();
@@ -107,7 +120,9 @@ public class ToDoList
 		System.out.println("Smallest first or largest first? (Enter smallest or largest)");
 		Comparator comparator = kbd1.nextLine().equalsIgnoreCase("largest") ? ListSort.LARGESTFIRST : ListSort.SMALLESTFIRST;
 
-		ArrayList<Job> out = list.sort(sortParameter,  new Filter.RangeFilter(filterParameter, minimum, maximum), comparator);
+		Filter[] filters = new Filter[]{rangeFilter, keywordFilter};
+
+		ArrayList<Job> out = list.sort(sortParameter,  filters, comparator);
 		for(int i = 0; i < out.size(); i ++)
 			System.out.println(out.get(i));
 

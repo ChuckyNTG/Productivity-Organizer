@@ -69,7 +69,7 @@ public class ListSort
 		});
 	}
 
-	public ArrayList<Job> sort(String attribute, Filter[] filters)
+	public ArrayList<Job> sort(String attribute, Filter[] filters, Comparator comparator)
 	{
 		Filter combined = new Filter()
 		{
@@ -82,7 +82,7 @@ public class ListSort
 				return true;
 			}
 		};
-		return sort(attribute, combined);
+		return sort(attribute, combined, comparator);
 	}
 
 	public ArrayList<Job> sort(String attribute, Filter filter)
