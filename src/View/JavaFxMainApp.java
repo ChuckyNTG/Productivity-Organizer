@@ -30,6 +30,8 @@ public class JavaFxMainApp extends Application
 		Label title = new Label("Productivity Organizer");
 		title.setLayoutX(100.0);
 		Button addButton = new Button("Add");
+		Button searchButton = new Button("Search");
+        searchButton.setLayoutY(25);
 		MenuItem priority = new MenuItem("Priority");
 		priority.setOnAction(e-> {
 			menuButton.setText("Priority");
@@ -85,13 +87,12 @@ public class JavaFxMainApp extends Application
 		//Create control panel for the top
 		AnchorPane head = new AnchorPane();
 		head.setPrefHeight(50.0);
-		head.getChildren().addAll(title,addButton,menuButton,clearAll);
+		head.getChildren().addAll(title,addButton,searchButton,menuButton,clearAll);
 		
 		//Create control for adding a job
 		addButton.setOnAction(e-> {
 			//Get a new add job panel
 			AddJob addJob = new AddJob(_model);
-			
 			//Display the panel
 			addJob.display();
 			//if the window was closed by adding the job
@@ -152,6 +153,12 @@ public class JavaFxMainApp extends Application
 		//Return here
 		//Access the information
 		//Display the information
+
+
+        searchButton.setOnAction(e ->{
+            Search sort = new Search();
+            sort.display();
+        });
 		
 		
 		BorderPane root = new BorderPane(sVBox.getScroller(),head,null,null,null);
