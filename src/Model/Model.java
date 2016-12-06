@@ -140,7 +140,14 @@ public class Model
 		postFilter.sort(new Comparator<Job>() {
 			@Override
 			public int compare(Job o1, Job o2) {
-				return comparator.compare(o1.getAtrribute(attribute), o2.getAtrribute(attribute));
+				Comparable a1 = o1.getAtrribute(attribute);
+				Comparable a2 = o2.getAtrribute(attribute);
+				if(a1 instanceof  String && a2 instanceof String)
+				{
+					a1 = ((String) a1).toUpperCase();
+					a2 = ((String) a2).toUpperCase();
+				}
+				return comparator.compare(a1, a2);
 			}
 		});
 		return postFilter;

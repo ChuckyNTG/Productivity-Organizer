@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 import java.time.LocalDate;
+import java.util.Map;
+import java.util.Set;
 
 import javafx.application.Application;
 import javafx.beans.property.IntegerProperty;
@@ -133,6 +135,20 @@ public class Job
 		}
 		return out;
 	}
+    public Comparable[] allAtributes()
+    {
+        Set<Map.Entry<String, Comparable>> entries = _attributes.entrySet();
+        Comparable[] attributes = new Comparable[entries.size()];
+
+        int i = 0;
+        for (Map.Entry<String, Comparable> e : entries) {
+            attributes[i] = e.getValue();
+            i++;
+        }
+
+        return attributes;
+    }
+
 }	
 	
 
