@@ -1,0 +1,8 @@
+CSE Final Exam|Remember to study|12-15-2016|high
+Buy cat food|They like the shredded kind|12-16-2016|low
+Feed cats|Make sure to feed all of them|12-17-2016|medium
+CSE homework|Page 251|12-10-2016|medium
+Wash car| |1-2-2017|low
+See doctor|Get that mole checked out|10-4-2020|low
+CSE Presentation|Practice beforehand|12-7-2016|high
+Pet the cat| |1-1-2017|high
