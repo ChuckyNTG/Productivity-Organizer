@@ -20,10 +20,10 @@ public class JobPane
 		anchorPane = new AnchorPane();
 		anchorPane.setPrefWidth(400.0);
 		anchorPane.setPrefHeight(50.0);
-		Label _name = new Label("Name:");
-		Label _description = new Label("Description:");
-		Label _priority = new Label("Priority:");
-		Label _date = new Label("Due:");
+		Label _name = new Label("Name: ");
+		Label _description = new Label("Description: ");
+		Label _priority = new Label("Priority: ");
+		Label _date = new Label("Due: ");
 		
 		nameText = new Label("NameHere");
 		desText = new Label("DescriptionHere");
@@ -38,19 +38,19 @@ public class JobPane
 		_date.setLayoutX(5.0);
 		
 		
-		_priority.setLayoutX(300);
+		_priority.setLayoutX(270);
 		_priority.setLayoutY(0);
 		
-		nameText.setLayoutX(_name.getLayoutX()+45.0);
+		nameText.setLayoutX(_name.getLayoutX()+48.0);
 		nameText.setLayoutY(_name.getLayoutY());
-		desText.setLayoutX(_description.getLayoutX()+80.0);
+		desText.setLayoutX(_description.getLayoutX()+83.0);
 		desText.setLayoutY(_description.getLayoutY());
-		prioText.setLayoutX(_priority.getLayoutX()+50.0);
+		prioText.setLayoutX(_priority.getLayoutX()+54.0);
 		prioText.setLayoutY(_priority.getLayoutY());
 		dateText.setLayoutX(_date.getLayoutX() + 45);
 		dateText.setLayoutY(_date.getLayoutY());
 		anchorPane.getChildren().addAll(_name,_description,_priority, _date,nameText,desText,prioText,dateText);
-		
+		anchorPane.setStyle("-fx-border-color: #e2e2e2");
 	}
 	
 	public AnchorPane getAnchorPane()

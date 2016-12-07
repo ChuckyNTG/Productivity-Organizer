@@ -70,7 +70,11 @@ public class Search {
         priorities.getChildren().add(low);
         priorities.getChildren().add(medium);
         priorities.getChildren().add(high);
+        String css = this.getClass().getResource("cssstyling.css").toExternalForm();
+		priorities.getStylesheets().add(css);
+        priorities.setStyle("-fx-background-color: #1d1d1d");
         priorityPane.setContent(priorities);
+       
 
         TitledPane keywordFrame = new TitledPane();
         keywordFrame.setExpanded(true);
@@ -85,12 +89,16 @@ public class Search {
 
         System.out.println(priorityPane.getBoundsInLocal().getHeight());
         anchorPane.getChildren().add(keywordFrame);
+        String css1 = this.getClass().getResource("cssstyling.css").toExternalForm();
+		anchorPane.getStylesheets().add(css1);
+		anchorPane.setStyle("-fx-background-color: #1d1d1d");
 
         Scene scene = new Scene(anchorPane);
         Stage stage = new Stage();
         stage.setScene(scene);
         Button searchButton = new Button();
-        searchButton.setLayoutY(100);
+        searchButton.setLayoutY(115);
+        searchButton.setLayoutX(165);
         searchButton.setText("Search");
         searchButton.setOnAction(e ->{
             int priorityNumber = 1;

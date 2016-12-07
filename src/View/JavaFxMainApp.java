@@ -2,7 +2,7 @@ package View;
 
 import Model.Model;
 import Model.Job;
-import com.sun.org.apache.xpath.internal.operations.Mod;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
@@ -30,6 +30,7 @@ public class JavaFxMainApp extends Application
 	@Override
 	public void start(Stage primaryStage) 
 	{
+		sVBox.getContent().setStyle("-fx-background-color: #1d1d1d");
 		Model.backup = new Model(_model);
 		//Title setup and menu item setup
 		if(toLoad != null) {
@@ -37,10 +38,13 @@ public class JavaFxMainApp extends Application
 		}
 		_model = new Model(Model.backup);
 		Label title = new Label("Productivity Organizer");
-		title.setLayoutX(100.0);
+		title.setLayoutX(125.0);
 		Button addButton = new Button("Add");
+		addButton.setLayoutX(5.0);
+		addButton.setLayoutY(40);
 		Button searchButton = new Button("Search");
-        searchButton.setLayoutY(25);
+		searchButton.setLayoutY(addButton.getLayoutY());
+		searchButton.setLayoutX(addButton.getLayoutX()+45);
 		MenuItem priority = new MenuItem("Priority");
 		priority.setOnAction(e-> {
 			menuButton.setText("Priority");
@@ -76,16 +80,16 @@ public class JavaFxMainApp extends Application
 		
 		//Adding menu buttons
 		menuButton = new SplitMenuButton(priority,dueDate,name);
-		menuButton.setText("None");
-		menuButton.setLayoutX(62);
-		menuButton.setLayoutY(74);
+		menuButton.setText("Sort By");
+		menuButton.setLayoutX(addButton.getLayoutX()+ 110);
+		menuButton.setLayoutY(addButton.getLayoutY());
 		//keep track of jobs
 		anchors = FXCollections.observableHashMap();
 		
 		//Clear all button
 		Button clearAll = new Button("Clear");
-		clearAll.setLayoutX(300);
-		clearAll.setLayoutY(50);
+		clearAll.setLayoutX(340);
+		clearAll.setLayoutY(addButton.getLayoutY());
 		clearAll.setOnAction(e->
 		{
 			sVBox.getContent().getChildren().clear();
@@ -95,8 +99,9 @@ public class JavaFxMainApp extends Application
 		
 		//Create control panel for the top
 		AnchorPane head = new AnchorPane();
-		head.setPrefHeight(50.0);
+		head.setPrefHeight(75.0);
 		head.getChildren().addAll(title,addButton,searchButton,menuButton,clearAll);
+		head.setStyle(" -fx-background-color: #1d1d1d");
 		
 		//Create control for adding a job
 		addButton.setOnAction(e-> {
@@ -172,7 +177,9 @@ public class JavaFxMainApp extends Application
 		
 		
 		BorderPane root = new BorderPane(sVBox.getScroller(),head,null,null,null);
-		
+		String css = this.getClass().getResource("cssstyling.css").toExternalForm();
+		root.getStylesheets().add(css);
+		root.setStyle(" -fx-background-color: #1d1d1d");
 		Scene scene = new Scene(root,400,400);
 	    primaryStage.setScene(scene);
 	    primaryStage.show();
