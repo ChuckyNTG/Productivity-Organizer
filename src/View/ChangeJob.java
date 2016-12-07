@@ -75,7 +75,7 @@ public class ChangeJob
 		{
 			oldJobDate += "-0" + String.valueOf(_job.getDate().get(Calendar.DAY_OF_MONTH));
 		}
-	    LocalDate jobDate = LocalDate.parse(oldJobDate);
+		LocalDate jobDate= LocalDate.of(_job.getDate().getTime().getYear(),_job.getDate().getTime().getMonth(),_job.getDate().getTime().getDay());
 		dueDatePicker.setValue(jobDate);
 		dueDatePicker.setOnAction(event->{
 			date = dueDatePicker.getValue();
