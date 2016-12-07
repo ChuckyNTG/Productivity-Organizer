@@ -40,6 +40,14 @@ public class Job
 		createDate(date);
 		
 	}
+
+	public Job(Job toCopy){
+		_attributes = FXCollections.observableHashMap();
+		for(Map.Entry<String, Comparable> e : toCopy._attributes.entrySet()){
+			_attributes.put(e.getKey(), e.getValue());
+		}
+	}
+
 	public void setID(int id)
 	{
 		_attributes.put("ID",id);
@@ -100,6 +108,7 @@ public class Job
 	
 	public void createDate(String date)
 	{
+		System.out.println("Creating date from \"" + date + "\"");
 		String delim = "[-]";
 		String[] tokens = date.split(delim);
 		int year = Integer.parseInt(tokens[0]);

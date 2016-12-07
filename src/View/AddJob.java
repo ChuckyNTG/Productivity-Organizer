@@ -116,7 +116,9 @@ public class AddJob
 				chk=low;
 			}
 			
-			_job = _model.add(jobName.getText(),descriptionInfo.getText(),chk.getText(),stringDate);
+			_job = _model.backup.add(jobName.getText(),descriptionInfo.getText(),chk.getText(),stringDate);
+			System.out.println("Total is " + _model.backup.getList().size());
+			//_model.add(_job);
 			this.addJob();
 			windowClosed = true;
 			addJobStage.close();

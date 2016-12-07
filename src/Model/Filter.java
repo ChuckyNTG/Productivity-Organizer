@@ -1,7 +1,5 @@
 package Model;
-/**
- * Created by anthony on 11/2/16.
- */
+
 public interface Filter {
     public static class RangeFilter implements  Filter{
         String attribute;
@@ -26,14 +24,18 @@ public interface Filter {
             if(minimum != null){
                 int comparison = job.getAtrribute(attribute).compareTo(minimum);
                 System.out.println(job.getAtrribute(attribute) + " ~ " + minimum + " = " + comparison);
-                if(comparison < 0 || (comparison == 0 && !includeMinimum))
+                if(comparison < 0 || (comparison == 0 && !includeMinimum)) {
+                    System.out.println(comparison);
                     return false;
+                }
             }
             if(maximum != null) {
                 int comparison = job.getAtrribute(attribute).compareTo(maximum);
                 System.out.println(job.getAtrribute(attribute) + " ~ " + maximum + " = " + comparison);
-                if (comparison > 0 || (comparison == 0 && !includeMaximum))
+                if (comparison > 0 || (comparison == 0 && !includeMaximum)) {
+                    System.out.println(comparison);
                     return false;
+                }
             }
             return true;
         };

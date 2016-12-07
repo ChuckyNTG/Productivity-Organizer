@@ -2,6 +2,7 @@ package View;
 
 import Model.Model;
 import Model.Job;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
@@ -14,6 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 
 public class JavaFxMainApp extends Application
 {
@@ -21,12 +24,18 @@ public class JavaFxMainApp extends Application
 	ScrollingVBox sVBox = new ScrollingVBox();
 	SplitMenuButton menuButton;
 	ObservableMap<JobPane,Job> anchors;
+	static File toLoad = null;
 
 	
 	@Override
 	public void start(Stage primaryStage) 
 	{
+		Model.backup = new Model(_model);
 		//Title setup and menu item setup
+		if(toLoad != null) {
+			Model.backup.loadFile(toLoad);
+		}
+		_model = new Model(Model.backup);
 		Label title = new Label("Productivity Organizer");
 		title.setLayoutX(100.0);
 		Button addButton = new Button("Add");
@@ -93,6 +102,7 @@ public class JavaFxMainApp extends Application
 		addButton.setOnAction(e-> {
 			//Get a new add job panel
 			AddJob addJob = new AddJob(_model);
+
 			//Display the panel
 			addJob.display();
 			//if the window was closed by adding the job
@@ -156,7 +166,7 @@ public class JavaFxMainApp extends Application
 
 
         searchButton.setOnAction(e ->{
-            Search sort = new Search();
+            Search sort = new Search(Model.backup, this);
             sort.display();
         });
 		
@@ -166,6 +176,7 @@ public class JavaFxMainApp extends Application
 		Scene scene = new Scene(root,400,400);
 	    primaryStage.setScene(scene);
 	    primaryStage.show();
+	    removeAndReAdd();
 	}
 	
 	
@@ -229,9 +240,19 @@ public class JavaFxMainApp extends Application
 	
 	
 	
-	 public static void main(String[] args)
-	 {	
-	        launch(args);
+	 public static void main(String[] args) {
+		 if (args.length > 0 && args[0].length() > 0) {
+			 String fileLocation = args[0];
+			 File file = new File(fileLocation);
+			 if (file.exists())
+				 toLoad = file;
+			 else {
+				 System.out.println("File not found: " + fileLocation);
+			 }
+		 }
+		launch(args);
+
+
 	 }
 	
 

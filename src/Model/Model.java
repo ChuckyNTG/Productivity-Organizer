@@ -1,10 +1,10 @@
 package Model;
 
 import java.awt.image.AreaAveragingScaleFilter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Objects;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
@@ -21,6 +21,7 @@ public class Model
 		}
 	};
 
+
 	public static final Comparator<Object> LARGESTFIRST = new Comparator<Object>() {
 
 		@Override
@@ -29,19 +30,49 @@ public class Model
 		}
 	};
 
-
 	//Sorting and displaying jobs
 	private ObservableList<Job> list;
 	//Accessing jobs
 	private ObservableMap<Integer,Job> _jobs;
-	
+	public static Model backup;
 	private static int idAccumulator = 0;
 	
 	public Model()
 	{
 		list = FXCollections.observableArrayList();
 		_jobs = FXCollections.observableHashMap();
-		
+	}
+
+	public void loadFile(File file){
+		try {
+			Files.lines(file.toPath()).forEach(e ->{
+				String[] parts = e.split("\\|");
+				add(parts[0], parts[1],parts[3],parts[2]);
+			});
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Model(Model toCopy){
+		this();
+		for(Job job : toCopy.getList())
+			list.add((job));
+		for(Map.Entry<Integer, Job> e : toCopy._jobs.entrySet())
+			_jobs.put(e.getKey(), new Job(e.getValue()));
+	}
+
+	public Model(ArrayList<Job> jobs){
+		this();
+		for(Job j : jobs) {
+			list.add(j);
+			_jobs.put(j.getID(), j);
+		}
+	}
+
+	public void add(Job j){
+		_jobs.put(j.getID(), j);
+		list.add(j);
 	}
 	
 	public ObservableList<Job> getList()
@@ -53,10 +84,11 @@ public class Model
 	{
 		Job job = new Job(name,description,priorityString,date);
 		job.setID(idAccumulator);
-		list.add(job);
+		list.add(idAccumulator, job);
 		_jobs.put(idAccumulator, job);
 		job = list.get(idAccumulator);
-		
+
+		System.out.println(_jobs.size());
 		idAccumulator++;
 		
 		return job;
@@ -93,15 +125,17 @@ public class Model
 
 	public void sort(String attribute)
 	{
+		System.out.println("Jobs:" + _jobs.size() + "List:" + list.size());
 		list.sort(new Comparator<Job>() {
 			@Override
 			public int compare(Job job, Job t1) {
 				return job.getAtrribute(attribute).compareTo(t1.getAtrribute(attribute));
 			}
 		});
-		
+
 		_jobs.clear();
-		
+
+
 		for(Job job: list)
 		{
 			_jobs.put(job.getID(), job);
@@ -130,6 +164,7 @@ public class Model
 	}
 
 	public ArrayList<Job> sort(String attribute, Filter filter, Comparator comparator){
+		System.out.println(list.size() + " to filter");
 		ArrayList<Job> postFilter = new ArrayList<>();
 		for(Job job : list)
 		{
@@ -137,19 +172,20 @@ public class Model
 				postFilter.add(job);
 
 		}
-		postFilter.sort(new Comparator<Job>() {
-			@Override
-			public int compare(Job o1, Job o2) {
-				Comparable a1 = o1.getAtrribute(attribute);
-				Comparable a2 = o2.getAtrribute(attribute);
-				if(a1 instanceof  String && a2 instanceof String)
-				{
-					a1 = ((String) a1).toUpperCase();
-					a2 = ((String) a2).toUpperCase();
+		if(attribute != null) {
+			postFilter.sort(new Comparator<Job>() {
+				@Override
+				public int compare(Job o1, Job o2) {
+					Comparable a1 = o1.getAtrribute(attribute);
+					Comparable a2 = o2.getAtrribute(attribute);
+					if (a1 instanceof String && a2 instanceof String) {
+						a1 = ((String) a1).toUpperCase();
+						a2 = ((String) a2).toUpperCase();
+					}
+					return comparator.compare(a1, a2);
 				}
-				return comparator.compare(a1, a2);
-			}
-		});
+			});
+		}
 		return postFilter;
 	}
 
