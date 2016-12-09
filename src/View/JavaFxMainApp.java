@@ -14,7 +14,7 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
+import View.AddJob;
 import java.io.File;
 
 
@@ -134,7 +134,7 @@ public class JavaFxMainApp extends Application
 				SplitMenuButton splitMenu = new SplitMenuButton(edit,remove);
 				splitMenu.setText("Options");
 				splitMenu.setLayoutX(300);
-				splitMenu.setLayoutY(20);
+				splitMenu.setLayoutY(40);
 				
 				//What happens when you click edit (change it)
 				edit.setOnAction(evnt->{
@@ -182,6 +182,8 @@ public class JavaFxMainApp extends Application
 		root.setStyle(" -fx-background-color: #1d1d1d");
 		Scene scene = new Scene(root,400,400);
 	    primaryStage.setScene(scene);
+	    primaryStage.setMaxWidth(430);
+	    primaryStage.setMaxHeight(400);
 	    primaryStage.show();
 	    removeAndReAdd();
 	}
@@ -224,7 +226,7 @@ public class JavaFxMainApp extends Application
 			SplitMenuButton splitMenu = new SplitMenuButton(edit,remove);
 			splitMenu.setText("Options");
 			splitMenu.setLayoutX(300);
-			splitMenu.setLayoutY(20);
+			splitMenu.setLayoutY(40);
 			edit.setOnAction(evnt->{
 				ChangeJob changeJob = new ChangeJob(_model,anchors.get(anchorPane));
 				changeJob.display();

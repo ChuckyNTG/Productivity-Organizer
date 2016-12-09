@@ -9,6 +9,18 @@
     -fx-opacity: 0.6;
 }
 
+.green-radio-button .dot{
+	
+}
+
+.red-radio-button .dot {
+  -fx-mark-highlight-color: red ;
+  -fx-mark-color: red ;
+  -fx-background-color: red;
+  -fx-background-insets: 0;
+  
+}
+
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";

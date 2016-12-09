@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.Toggle;
@@ -57,7 +58,7 @@ public class AddJob
 		jobName.setLayoutY(45);
 		jobName.setPrefSize(233, 31);
 		
-		TextField descriptionInfo = new TextField();
+		TextArea descriptionInfo = new TextArea();
 		
 		descriptionInfo.setPrefSize(219, 69);
 		descriptionInfo.setLayoutX(170);
@@ -80,6 +81,7 @@ public class AddJob
 		
 		RadioButton low = new RadioButton("Low");
 		low.setToggleGroup(group);
+		low.setSelected(true);
 		low.setLayoutX(170);
 		low.setLayoutY(87);
 		RadioButton medium = new RadioButton("Medium");
@@ -105,11 +107,10 @@ public class AddJob
 				});
 		
 		Button addTask = new Button("Add");
-		addTask.setLayoutX(8);
+		addTask.setLayoutX(392);
 		addTask.setLayoutY(250);
 		addTask.setOnAction(e -> {
-			String jobNameText = jobName.getText();
-			String jobDescriptionText = descriptionInfo.getText();
+
 			//In case radio button doesnt change
 			if(chk == null)
 			{
@@ -124,17 +125,13 @@ public class AddJob
 			addJobStage.close();
 			});
 		
-		Button cancel = new Button("Cancel");
-		cancel.setLayoutX(392);
-		cancel.setLayoutY(250);
-		
 		
 		AnchorPane jobContents = new AnchorPane();
 		jobContents.setPrefSize(400, 200);
 		jobContents.getChildren().addAll(name,priority,dueDate,description,dueDatePicker,
-											low,medium,high,jobName,descriptionInfo,addTask,cancel);
+											low,medium,high,jobName,descriptionInfo,addTask);
 		TitledPane addJob = new TitledPane();
-		addJob.setText("Modify");
+		addJob.setText("Add");
 		addJob.setContent(jobContents);
 		addJob.setCollapsible(false);
 		addJob.setAnimated(false);
@@ -151,7 +148,14 @@ public class AddJob
 		anchorPane = new JobPane();
 		anchorPane.setName(_job.getName());  
         anchorPane.setDescription(_job.getDescription());
-        anchorPane.setPriority(String.valueOf(_job.getPriority()));
+        int priority =_job.getPriority();
+        String priorityString = "Low";
+        
+		if(priority == 3)
+			priorityString = "High";
+		if(priority == 2)
+			priorityString = "Medium" ;
+        anchorPane.setPriority(priorityString);
       //theres probably a better way todo this but I was tired
         int year = _job.getDate().get(Calendar.YEAR);
         int month = _job.getDate().get(Calendar.MONTH);

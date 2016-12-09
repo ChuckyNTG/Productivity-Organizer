@@ -76,7 +76,7 @@ public class ChangeJob
 		{
 			oldJobDate += "-0" + String.valueOf(_job.getDate().get(Calendar.DAY_OF_MONTH));
 		}
-		LocalDate jobDate= LocalDate.of(_job.getDate().getTime().getYear(),_job.getDate().getTime().getMonth(),_job.getDate().getTime().getDay());
+		LocalDate jobDate= LocalDate.of(_job.getDate().get(Calendar.YEAR),_job.getDate().get(Calendar.MONTH)+1,_job.getDate().get(Calendar.DAY_OF_MONTH));
 		dueDatePicker.setValue(jobDate);
 		dueDatePicker.setOnAction(event->{
 			date = dueDatePicker.getValue();
@@ -151,7 +151,7 @@ public class ChangeJob
 				date = jobDate;
 				stringDate = date.toString();
 			}
-			_model.change(_job.getID(),jobNameText,jobDescriptionText, chk.getText(), stringDate);
+			_model.backup.change(_job.getID(),jobNameText,jobDescriptionText, chk.getText(), stringDate);
 			this.changeJob();
 			windowClosed = true;
 			addJobStage.close();
@@ -186,7 +186,7 @@ public class ChangeJob
         anchorPane.setDescription(_job.getDescription());
         int priority =_job.getPriority();
         String priorityString = "Low";
-        
+        anchorPane.getAnchorPane().setStyle("-fx-border-color: green");
 		if(priority == 3)
 			priorityString = "High";
 		if(priority == 2)
