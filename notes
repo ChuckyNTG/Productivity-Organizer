@@ -48,3 +48,16 @@ Added a date field to Job class
 
 11-1
 Need to implement case for change in main method. Also need to make sure when user enters wrong ID that the program responds accordingly.Will look at task history and reminders and last change date later
+
+12-10
+
+Implement a better gui
+	-Check box to remove item
+	-No description
+	-Info button
+	-Be able to create groups for items and store them in different tabs
+	-Create a search bar
+	-Styling
+Backend
+	-Create superclass for AddJob and ChangeJob
+	-Setup save and load

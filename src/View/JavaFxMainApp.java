@@ -51,9 +51,11 @@ public class JavaFxMainApp extends Application
 			if(!isEmpty())
 			{
 				_model.sort("priority");
+				_model.backup.sort("priority");
 				this.removeAndReAdd();
-			}
 				System.out.println("Sort by priority");
+			}
+				
 		});
 		MenuItem dueDate = new MenuItem("Due Date");
 		dueDate.setOnAction(e-> {
@@ -61,6 +63,7 @@ public class JavaFxMainApp extends Application
 			if(!isEmpty())
 			{
 				_model.sort("date");
+				_model.backup.sort("date");
 				this.removeAndReAdd();
 			}
 			System.out.println("Sort by Due Date");
@@ -71,6 +74,7 @@ public class JavaFxMainApp extends Application
 			if(!isEmpty())
 			{
 				_model.sort("name");
+				_model.backup.sort("name");
 				this.removeAndReAdd();
 			}
 			System.out.println("Sort by Name(Alphabetical)");
@@ -94,6 +98,7 @@ public class JavaFxMainApp extends Application
 		{
 			sVBox.getContent().getChildren().clear();
 			sVBox.getContent().getChildren();
+			_model.backup.clear();
 			_model.clear();
 		});
 		
@@ -126,6 +131,7 @@ public class JavaFxMainApp extends Application
 					anchors.remove(jobPane);
 					//Remove the job from the model
 					_model.remove(addJob.getJob());
+					_model.backup.remove(addJob.getJob());
 					//Do not display it
 					sVBox.getContent().getChildren().remove(jobPane.getAnchorPane());
 				});
@@ -134,7 +140,7 @@ public class JavaFxMainApp extends Application
 				SplitMenuButton splitMenu = new SplitMenuButton(edit,remove);
 				splitMenu.setText("Options");
 				splitMenu.setLayoutX(300);
-				splitMenu.setLayoutY(40);
+				splitMenu.setLayoutY(addJob.getJobPane().getAnchorPane().getPrefHeight()-30);
 				
 				//What happens when you click edit (change it)
 				edit.setOnAction(evnt->{
@@ -162,12 +168,7 @@ public class JavaFxMainApp extends Application
 				sVBox.getContent().getChildren().add(jobPane.getAnchorPane());
 			}
 		});
-		//Click on add
-		//Open the add job window
-		//Store the information in the add job window
-		//Return here
-		//Access the information
-		//Display the information
+		
 
 
         searchButton.setOnAction(e ->{
@@ -182,8 +183,12 @@ public class JavaFxMainApp extends Application
 		root.setStyle(" -fx-background-color: #1d1d1d");
 		Scene scene = new Scene(root,400,400);
 	    primaryStage.setScene(scene);
-	    primaryStage.setMaxWidth(430);
-	    primaryStage.setMaxHeight(400);
+	    primaryStage.setWidth(430);
+	    primaryStage.setHeight(400);
+	    primaryStage.setMaxWidth(primaryStage.getWidth());
+	    primaryStage.setMaxHeight(primaryStage.getHeight());
+	    primaryStage.setMinWidth(primaryStage.getWidth());
+	    primaryStage.setMinHeight(primaryStage.getHeight());
 	    primaryStage.show();
 	    removeAndReAdd();
 	}
@@ -213,7 +218,7 @@ public class JavaFxMainApp extends Application
 		{
 			AddJob addJob = new AddJob(_model);
 			addJob.setJob(i);
-			addJob.addJob();
+			addJob.jobAction();
 			JobPane anchorPane = addJob.getJobPane();
 
 			MenuItem edit = new MenuItem("Edit");
@@ -221,6 +226,7 @@ public class JavaFxMainApp extends Application
 			remove.setOnAction(evt -> {
 				anchors.remove(anchorPane);
 				_model.remove(addJob.getJob());
+				_model.backup.remove(addJob.getJob());
 				sVBox.getContent().getChildren().remove(anchorPane.getAnchorPane());
 			});
 			SplitMenuButton splitMenu = new SplitMenuButton(edit,remove);

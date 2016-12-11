@@ -35,7 +35,7 @@ public class Model
 	//Accessing jobs
 	private ObservableMap<Integer,Job> _jobs;
 	public static Model backup;
-	private static int idAccumulator = 0;
+	private int idAccumulator = 0;
 	
 	public Model()
 	{

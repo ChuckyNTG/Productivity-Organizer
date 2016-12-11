@@ -12,7 +12,9 @@
 .green-radio-button .dot{
 	
 }
-
+.anchorpane{
+	-fx-background-color: #1d1d1d;
+}
 .red-radio-button .dot {
   -fx-mark-highlight-color: red ;
   -fx-mark-color: red ;

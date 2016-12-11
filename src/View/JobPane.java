@@ -15,43 +15,33 @@ public class JobPane
 	Label nameText;
 	Label desText;
 	Label dateText;
-	RadioButton _priority;
+	AnchorPane _priority;
 	
 	public JobPane()
 	{
 		anchorPane = new AnchorPane();
-		anchorPane.setPrefWidth(400.0);
-		anchorPane.setPrefHeight(75.0);
-		_priority = new RadioButton("");
-		_priority.setSelected(true);
-		_priority.setDisable(true);
-		_priority.setContentDisplay(ContentDisplay.LEFT);
-		Label _name = new Label("Name: ");
-		Label _description = new Label("Description: ");
-		Label _date = new Label("Due: ");
+		anchorPane.setPrefWidth(430.0);
+		anchorPane.setPrefHeight(40);
+		
+		_priority = new AnchorPane();
+		_priority.setPrefHeight(anchorPane.getPrefHeight());
+		_priority.setPrefWidth(10);
+		_priority.setLayoutX(400);
+		_priority.setLayoutY(2.0);
+		
+		
 		
 		nameText = new Label("NameHere");
 		desText = new Label("DescriptionHere");
 		dateText = new Label("Due Date: ");
 		
-		_name.setLayoutX(5.0);
-		_name.setLayoutY(0);
-		_description.setLayoutY(30.0);
-		_description.setLayoutX(5.0);
-		_date.setLayoutY(45.0);
-		_date.setLayoutX(5.0);
-		
-		
-		_priority.setLayoutX(280);
-		_priority.setLayoutY(10);
-		
-		nameText.setLayoutX(_name.getLayoutX()+48.0);
-		nameText.setLayoutY(_name.getLayoutY());
-		desText.setLayoutX(_description.getLayoutX()+83.0);
-		desText.setLayoutY(_description.getLayoutY());
-		dateText.setLayoutX(_date.getLayoutX() + 45);
-		dateText.setLayoutY(_date.getLayoutY());
-		anchorPane.getChildren().addAll(_name,_description,_priority, _date,nameText,desText,dateText);
+		nameText.setLayoutX(5.0);
+		nameText.setLayoutY(0);
+		desText.setLayoutX(5.0);
+		desText.setLayoutY(15.0);
+		dateText.setLayoutX(50);
+		dateText.setLayoutY(0);
+		anchorPane.getChildren().addAll(_priority,nameText,desText,dateText);
 		anchorPane.setStyle("-fx-border-color: #e2e2e2");
 	}
 	
@@ -73,11 +63,11 @@ public class JobPane
 	
 	public void setPriority(String priority)
 	{
-		_priority.setText(priority);
-		if(priority.equals("Low"))
-		{
-			_priority.getStyleClass().add("red-radio-button");
-		}
+		_priority.setStyle("-fx-background-color: GREEN");
+		if(priority.equals("High"))
+			_priority.setStyle("-fx-background-color: RED");
+		if(priority.equals("Medium"))
+			_priority.setStyle("-fx-background-color: ORANGE");;
 	}
 	
 	
