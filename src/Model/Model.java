@@ -13,6 +13,9 @@ import javafx.collections.ObservableMap;
 
 public class Model
 {
+	/**
+	 * Sorts attributes by smallest value first
+	 */
 	public static final Comparator<Object> SMALLESTFIRST = new Comparator<Object>() {
 
 		@Override
@@ -21,7 +24,9 @@ public class Model
 		}
 	};
 
-
+	/**
+	 * Sorts attributes by largest value first
+	 */
 	public static final Comparator<Object> LARGESTFIRST = new Comparator<Object>() {
 
 		@Override
@@ -122,7 +127,10 @@ public class Model
 		changed.createDate(newDate);
 	}
 
-
+	/**
+	 * Sorts by predefined attribute
+	 * @param attribute to sort by
+	 */
 	public void sort(String attribute)
 	{
 		System.out.println("Jobs:" + _jobs.size() + "List:" + list.size());
@@ -141,7 +149,13 @@ public class Model
 			_jobs.put(job.getID(), job);
 		}
 	}
-
+	
+	/**
+	 * Sorts by attribute using array of filters
+	 * @param attribute
+	 * @param filters
+	 * @return
+	 */
 	public ArrayList<Job> sort(String attribute, Filter[] filters)
 	{
 		Filter combined = new Filter()
@@ -164,7 +178,7 @@ public class Model
 	}
 
 	public ArrayList<Job> sort(String attribute, Filter filter, Comparator comparator){
-		System.out.println(list.size() + " to filter");
+		System.out.println(list.size() + " to filt er");
 		ArrayList<Job> postFilter = new ArrayList<>();
 		for(Job job : list)
 		{

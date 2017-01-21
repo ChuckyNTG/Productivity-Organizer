@@ -1,5 +1,11 @@
 package Model;
 
+
+/**
+ * Filters the tasks by a user defined attribute
+ * @author Anthony Clark
+ *
+ */
 public interface Filter {
     public static class RangeFilter implements  Filter{
         String attribute;
