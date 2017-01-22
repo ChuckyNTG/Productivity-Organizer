@@ -48,15 +48,6 @@ public class Job
 		}
 	}
 
-	public void setID(int id)
-	{
-		_attributes.put("ID",id);
-	}
-	public int getID()
-	{
-		return (int) _attributes.get("ID"); 	
-	}
-	
 	public void setName(String name)
 	{
 		_attributes.put("name", name);
@@ -144,6 +135,11 @@ public class Job
 		}
 		return out;
 	}
+	
+	/**
+	 * Generates a list of all the attribute values for this job
+	 * @return values of all the attributes
+	 */
     public Comparable[] allAtributes()
     {
         Set<Map.Entry<String, Comparable>> entries = _attributes.entrySet();

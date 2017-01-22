@@ -14,6 +14,22 @@ import javafx.collections.ObservableMap;
 public class Model
 {
 	/**
+	 * _tasks stores user created tasks in the organizer
+	 * _filteredTasks stores the tasks the user desires to filter out of _tasks
+	 */
+	private ObservableList<Job> _tasks;
+	private ObservableList<Job> _filteredTasks;
+
+	/**
+	 * Initializes the two array lists used for storage of tasks
+	 */
+	public Model()
+	{
+		_tasks = FXCollections.observableArrayList();
+		_filteredTasks = FXCollections.observableArrayList();
+	}
+	
+	/**
 	 * Sorts attributes by smallest value first
 	 */
 	public static final Comparator<Object> SMALLESTFIRST = new Comparator<Object>() {
@@ -34,97 +50,65 @@ public class Model
 			return ((Comparable) t1).compareTo(o);
 		}
 	};
-
-	//Sorting and displaying jobs
-	private ObservableList<Job> list;
-	//Accessing jobs
-	private ObservableMap<Integer,Job> _jobs;
-	public static Model backup;
-	private int idAccumulator = 0;
 	
-	public Model()
+	public ObservableList<Job> getTasks()
 	{
-		list = FXCollections.observableArrayList();
-		_jobs = FXCollections.observableHashMap();
+		return _tasks;
 	}
 
-	public void loadFile(File file){
-		try {
-			Files.lines(file.toPath()).forEach(e ->{
-				String[] parts = e.split("\\|");
-				add(parts[0], parts[1],parts[3],parts[2]);
-			});
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public Model(Model toCopy){
-		this();
-		for(Job job : toCopy.getList())
-			list.add((job));
-		for(Map.Entry<Integer, Job> e : toCopy._jobs.entrySet())
-			_jobs.put(e.getKey(), new Job(e.getValue()));
-	}
-
-	public Model(ArrayList<Job> jobs){
-		this();
-		for(Job j : jobs) {
-			list.add(j);
-			_jobs.put(j.getID(), j);
-		}
-	}
-
-	public void add(Job j){
-		_jobs.put(j.getID(), j);
-		list.add(j);
+	public void add(Job j)
+	{
+		_tasks.add(j);
+		_filteredTasks.add(j);
 	}
 	
-	public ObservableList<Job> getList()
-	{
-		return list;
-	}
 	
 	public Job add(String name,String description,String priorityString,String date)
 	{
 		Job job = new Job(name,description,priorityString,date);
-		job.setID(idAccumulator);
-		list.add(idAccumulator, job);
-		_jobs.put(idAccumulator, job);
-		job = list.get(idAccumulator);
+		this.add(job);
 
-		System.out.println(_jobs.size());
-		idAccumulator++;
+		System.out.println(_tasks.size());
 		
 		return job;
 	}
 
 	public void remove(Job job) 
 	{
-		list.remove(job);
-		_jobs.remove(job.getID());
+		_tasks.remove(job);
+		_filteredTasks.remove(job);
 	}
 	
-	public Job getJob(int id)
+	public Job getJob(Job j)
 	{
-		return _jobs.get(id);
+		int index = _tasks.indexOf(j);
+		return _tasks.get(index);
 	}
 	
-	
-	//clear all jobs and reset id
+	/**
+	 * Clear the lists of all jobs
+	 */
 	public void clear()
 	{
-		list.clear();
-		idAccumulator = 0;
+		_tasks.clear();
+		_filteredTasks.clear();
 	}
 	
-	public void change(int id,String newName,String newDes,String newPriority,String newDate)
+	
+	/**
+	 * Change a parameter for the task
+	 * @param newName sets the new name for the task
+	 * @param newDes sets the new description for the task
+	 * @param newPriority sets the new priority for the task
+	 * @param newDate sets the new date for the task
+	 */
+	public void change(Job j, String newName,String newDes,String newPriority,String newDate)
 	{
-		Job changed = getJob(id);
-		changed.setName(newName);
-		changed.setDescription(newDes);
-		changed.setPriority(newPriority);
-		changed.createDate(newDate);
+		Job modify = getJob(j);
+		modify.setName(newName);
+		modify.setDescription(newDes);
+		modify.setPriority(newPriority);
+		modify.createDate(newDate);
 	}
 
 	/**
@@ -133,21 +117,43 @@ public class Model
 	 */
 	public void sort(String attribute)
 	{
-		System.out.println("Jobs:" + _jobs.size() + "List:" + list.size());
-		list.sort(new Comparator<Job>() {
+		_tasks.sort(new Comparator<Job>() {
 			@Override
 			public int compare(Job job, Job t1) {
 				return job.getAtrribute(attribute).compareTo(t1.getAtrribute(attribute));
 			}
 		});
 
-		_jobs.clear();
+		_filteredTasks.clear();
 
 
-		for(Job job: list)
+		for(Job job: _tasks)
 		{
-			_jobs.put(job.getID(), job);
+			_filteredTasks.add(job);
 		}
+	}
+	
+	
+	
+	public void printList()
+	{
+		System.out.println("The details of the list:");
+	
+		for(Job job:_tasks)
+		{
+			System.out.println(job.toString());				
+		}
+	}
+
+	@Override
+	public String toString(){
+		String out = "";
+		for(Job job : _tasks){
+			if(out.length() >= 1)
+				out += '\n';
+			out += job.toString();
+		}
+		return out;
 	}
 	
 	/**
@@ -155,7 +161,7 @@ public class Model
 	 * @param attribute
 	 * @param filters
 	 * @return
-	 */
+	 
 	public ArrayList<Job> sort(String attribute, Filter[] filters)
 	{
 		Filter combined = new Filter()
@@ -202,30 +208,22 @@ public class Model
 		}
 		return postFilter;
 	}
-
-	public void printList()
-	{
-		System.out.println("The details of the list:");
+	*/
 	
-		for(Job job:list)
-		{
-			System.out.println(job.toString());				
+	/**
+	 * Loads file filled with jobs
+	 * @param file is the file to read the jobs from
+	public void loadFile(File file){
+		try {
+			Files.lines(file.toPath()).forEach(e ->{
+				String[] parts = e.split("\\|");
+				add(parts[0], parts[1],parts[3],parts[2]);
+			});
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
-	
-	public int getId()
-	{
-		return idAccumulator;
-	}
+	*/
 
-	@Override
-	public String toString(){
-		String out = "";
-		for(Job job : list){
-			if(out.length() >= 1)
-				out += '\n';
-			out += job.toString();
-		}
-		return out;
-	}
+	
 }
